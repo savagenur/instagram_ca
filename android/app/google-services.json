@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "207260328079",
+    "project_id": "instagram-ca",
+    "storage_bucket": "instagram-ca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:207260328079:android:117a15605ad8903c9490fa",
+        "android_client_info": {
+          "package_name": "com.savagenur.instagram_ca"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "207260328079-aqd9204t2nccv4up6dg00qfuv0fbku8f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2synKMXP5O-r51YRWVv8rkwhVcdPMfdo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "207260328079-aqd9204t2nccv4up6dg00qfuv0fbku8f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
