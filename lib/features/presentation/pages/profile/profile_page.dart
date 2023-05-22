@@ -1,11 +1,14 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_ca/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram_ca/features/domain/entities/user_entity.dart';
+import 'package:instagram_ca/features/presentation/cubit/auth/cubit/auth_cubit.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-import 'edit_profile_page.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  final UserEntity currentUser;
+  const ProfilePage({super.key, required this.currentUser});
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +16,8 @@ class ProfilePage extends StatelessWidget {
       backgroundColor: backgroundColor,
       appBar: AppBar(
         backgroundColor: backgroundColor,
-        title: const Text(
-          "Username",
+        title:  Text(
+          "${currentUser.userName}",
           style: TextStyle(
             color: primaryColor,
           ),
@@ -60,8 +63,8 @@ class ProfilePage extends StatelessWidget {
                     children: [
                       Column(
                         children: [
-                          const Text(
-                            "0",
+                           Text(
+                            "${currentUser.totalPosts}",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: primaryColor,
@@ -80,8 +83,8 @@ class ProfilePage extends StatelessWidget {
                       sizeHor(25),
                       Column(
                         children: [
-                          const Text(
-                            "24",
+                           Text(
+                            "${currentUser.totalFollowers}",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: primaryColor,
@@ -100,8 +103,8 @@ class ProfilePage extends StatelessWidget {
                       sizeHor(25),
                       Column(
                         children: [
-                          const Text(
-                            "123",
+                           Text(
+                            "${currentUser.totalFollowing}",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: primaryColor,
@@ -122,16 +125,16 @@ class ProfilePage extends StatelessWidget {
                 ],
               ),
               sizeVer(10),
-              const Text(
-                "Name",
+               Text(
+                "${ currentUser.name==""?currentUser.userName:currentUser.name}",
                 style: TextStyle(
                   color: primaryColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               sizeVer(10),
-              const Text(
-                "The bio of user ",
+               Text(
+                "${currentUser.bio}",
                 style: TextStyle(
                   color: primaryColor,
                 ),
@@ -220,14 +223,20 @@ class ProfilePage extends StatelessWidget {
                       color: secondaryColor,
                     ),
                     sizeVer(7),
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.only(left: 10),
-                      child: Text(
-                        "Logout",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                          color: primaryColor,
+                      child: InkWell(
+                        onTap: () {
+                          BlocProvider.of<AuthCubit>(context).loggedOut();
+                          Navigator.pushNamed(context, PageConst.signInPage);
+                        },
+                        child: Text(
+                          "Logout",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                            color: primaryColor,
+                          ),
                         ),
                       ),
                     )

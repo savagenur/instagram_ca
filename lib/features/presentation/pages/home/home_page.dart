@@ -29,127 +29,129 @@ class HomePage extends StatelessWidget {
           )
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 10,
-          vertical: 10,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      width: 30,
-                      height: 30,
-                      decoration: const BoxDecoration(
-                        color: secondaryColor,
-                        shape: BoxShape.circle,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 10,
+            vertical: 10,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        width: 30,
+                        height: 30,
+                        decoration: const BoxDecoration(
+                          color: secondaryColor,
+                          shape: BoxShape.circle,
+                        ),
                       ),
-                    ),
-                    sizeHor(10),
-                    const Text(
-                      "Username",
-                      style: TextStyle(
-                        color: primaryColor,
-                        fontWeight: FontWeight.bold,
+                      sizeHor(10),
+                      const Text(
+                        "Username",
+                        style: TextStyle(
+                          color: primaryColor,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                GestureDetector(
-                    onTap: () {
-                      _openBottomModalSheet(context);
-                    },
-                    child: const Icon(
-                      Icons.more_vert,
-                      color: primaryColor,
-                    )),
-              ],
-            ),
-            sizeVer(10),
-            Container(
-              width: double.infinity,
-              height: MediaQuery.of(context).size.height * .3,
-              color: secondaryColor,
-            ),
-            sizeVer(10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.favorite,
-                      color: primaryColor,
-                    ),
-                    sizeHor(10),
-                    GestureDetector(
-                      onTap: () => Navigator.pushNamed(context, PageConst.commentPage),
+                    ],
+                  ),
+                  GestureDetector(
+                      onTap: () {
+                        _openBottomModalSheet(context);
+                      },
                       child: const Icon(
-                        Feather.message_circle,
+                        Icons.more_vert,
+                        color: primaryColor,
+                      )),
+                ],
+              ),
+              sizeVer(10),
+              Container(
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height * .3,
+                color: secondaryColor,
+              ),
+              sizeVer(10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.favorite,
                         color: primaryColor,
                       ),
+                      sizeHor(10),
+                      GestureDetector(
+                        onTap: () => Navigator.pushNamed(context, PageConst.commentPage),
+                        child: const Icon(
+                          Feather.message_circle,
+                          color: primaryColor,
+                        ),
+                      ),
+                      sizeHor(10),
+                      const Icon(
+                        Feather.send,
+                        color: primaryColor,
+                      ),
+                      sizeHor(10),
+                    ],
+                  ),
+                  const Icon(
+                    Icons.bookmark_border,
+                    color: primaryColor,
+                  )
+                ],
+              ),
+              sizeVer(10),
+              const Text(
+                "134 likes",
+                style: TextStyle(
+                  color: primaryColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              sizeVer(10),
+              Row(
+                children: [
+                  const Text(
+                    "Username",
+                    style: TextStyle(
+                      color: primaryColor,
+                      fontWeight: FontWeight.bold,
                     ),
-                    sizeHor(10),
-                    const Icon(
-                      Feather.send,
+                  ),
+                  sizeHor(10),
+                  const Text(
+                    "some description",
+                    style: TextStyle(
                       color: primaryColor,
                     ),
-                    sizeHor(10),
-                  ],
-                ),
-                const Icon(
-                  Icons.bookmark_border,
-                  color: primaryColor,
-                )
-              ],
-            ),
-            sizeVer(10),
-            const Text(
-              "134 likes",
-              style: TextStyle(
-                color: primaryColor,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            sizeVer(10),
-            Row(
-              children: [
-                const Text(
-                  "Username",
-                  style: TextStyle(
-                    color: primaryColor,
-                    fontWeight: FontWeight.bold,
                   ),
-                ),
-                sizeHor(10),
-                const Text(
-                  "some description",
-                  style: TextStyle(
-                    color: primaryColor,
-                  ),
-                ),
-              ],
-            ),
-            sizeVer(10),
-            const Text(
-              "View all 10 comments",
-              style: TextStyle(
-                color: darkGreyColor,
+                ],
               ),
-            ),
-            sizeVer(10),
-            const Text(
-              "08/07/2022",
-              style: TextStyle(
-                color: darkGreyColor,
+              sizeVer(10),
+              const Text(
+                "View all 10 comments",
+                style: TextStyle(
+                  color: darkGreyColor,
+                ),
               ),
-            ),
-          ],
+              sizeVer(10),
+              const Text(
+                "08/07/2022",
+                style: TextStyle(
+                  color: darkGreyColor,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
