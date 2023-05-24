@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_ca/constants.dart';
+import 'package:instagram_ca/features/domain/entities/user_entity.dart';
 import 'package:instagram_ca/features/presentation/pages/post/update_post_page.dart';
 import 'package:instagram_ca/features/presentation/pages/profile/edit_profile_page.dart';
 
@@ -12,7 +13,11 @@ class OnGenerateRoute {
     final args = settings.arguments;
     switch (settings.name) {
       case PageConst.editProfilePage:
-        return routeBuilder(EditProfilePage());
+        if (args is UserEntity) {
+          return routeBuilder(EditProfilePage(currentUser: args));
+        } else {
+          return routeBuilder(NoPageFound());
+        }
       case PageConst.updatePostPage:
         return routeBuilder(UpdatePostPage());
       case PageConst.commentPage:
