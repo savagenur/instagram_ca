@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:instagram_ca/constants.dart';
-import 'package:instagram_ca/features/domain/entities/user_entity.dart';
+import 'package:instagram_ca/features/domain/entities/user/user_entity.dart';
 import 'package:instagram_ca/features/presentation/cubit/auth/cubit/auth_cubit.dart';
 import 'package:instagram_ca/features/presentation/cubit/credential/cubit/credential_cubit.dart';
 import 'package:instagram_ca/features/presentation/pages/main_screen/main_screen.dart';

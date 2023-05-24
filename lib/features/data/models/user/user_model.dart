@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:instagram_ca/features/domain/entities/user_entity.dart';
+import 'package:instagram_ca/features/domain/entities/user/user_entity.dart';
 
 class UserModel extends UserEntity {
   final String? uid;

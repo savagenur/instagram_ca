@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import 'package:instagram_ca/features/domain/entities/user_entity.dart';
+import 'package:instagram_ca/features/domain/entities/user/user_entity.dart';
 import 'package:instagram_ca/features/domain/usecases/firebase_usecases/user/get_users_usecase.dart';
 import 'package:instagram_ca/features/domain/usecases/firebase_usecases/user/update_user_usecase.dart';
 

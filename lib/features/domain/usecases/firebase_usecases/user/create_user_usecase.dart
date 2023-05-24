@@ -1,5 +1,5 @@
 
-import '../../../entities/user_entity.dart';
+import '../../../entities/user/user_entity.dart';
 import '../../../repository/firebase_repository.dart';
 
 class CreateUserUseCase {

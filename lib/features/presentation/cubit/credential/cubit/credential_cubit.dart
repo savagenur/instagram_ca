@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:instagram_ca/features/domain/entities/user_entity.dart';
+import 'package:instagram_ca/features/domain/entities/user/user_entity.dart';
 
 import 'package:instagram_ca/features/domain/usecases/firebase_usecases/user/sign_in_user_usecase.dart';
 import 'package:instagram_ca/features/domain/usecases/firebase_usecases/user/sign_up_user_usecase.dart';

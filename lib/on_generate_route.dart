@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_ca/constants.dart';
-import 'package:instagram_ca/features/domain/entities/user_entity.dart';
+import 'package:instagram_ca/features/domain/entities/user/user_entity.dart';
 import 'package:instagram_ca/features/presentation/pages/post/update_post_page.dart';
 import 'package:instagram_ca/features/presentation/pages/profile/edit_profile_page.dart';
 

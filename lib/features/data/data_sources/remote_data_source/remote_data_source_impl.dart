@@ -7,7 +7,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:instagram_ca/constants.dart';
 import 'package:instagram_ca/features/data/data_sources/remote_data_source/remote_data_source.dart';
 import 'package:instagram_ca/features/data/models/user/user_model.dart';
-import 'package:instagram_ca/features/domain/entities/user_entity.dart';
+import 'package:instagram_ca/features/domain/entities/post/post_entity.dart';
+import 'package:instagram_ca/features/domain/entities/user/user_entity.dart';
 import 'package:uuid/uuid.dart';
 
 // Learn All this document! It's about FirebaseAuth
@@ -203,5 +204,35 @@ class FirebaseRemoteDataSourceImpl implements FirebaseRemoteDataSource {
     }).catchError((error) {
       toast("Some error occur");
     });
+  }
+
+  @override
+  Future<void> createPost(PostEntity postEntity) {
+    // TODO: implement createPost
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> deletePost(PostEntity postEntity) {
+    // TODO: implement deletePost
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> likePost(PostEntity postEntity) {
+    // TODO: implement likePost
+    throw UnimplementedError();
+  }
+
+  @override
+  Stream<List<PostEntity>> readPost(PostEntity postEntity) {
+    // TODO: implement readPost
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> updatePost(PostEntity postEntity) {
+    // TODO: implement updatePost
+    throw UnimplementedError();
   }
 }

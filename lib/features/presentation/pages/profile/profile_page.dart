@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_ca/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:instagram_ca/features/domain/entities/user_entity.dart';
+import 'package:instagram_ca/features/domain/entities/user/user_entity.dart';
 import 'package:instagram_ca/features/presentation/cubit/auth/cubit/auth_cubit.dart';
 import 'package:instagram_ca/profile_widget.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
