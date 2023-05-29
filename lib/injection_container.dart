@@ -6,6 +6,7 @@ import 'package:instagram_ca/features/data/data_sources/remote_data_source/remot
 import 'package:instagram_ca/features/data/data_sources/remote_data_source/remote_data_source_impl.dart';
 import 'package:instagram_ca/features/data/repository/firebase_repository_impl.dart';
 import 'package:instagram_ca/features/domain/repository/firebase_repository.dart';
+import 'package:instagram_ca/features/domain/usecases/firebase_usecases/post/create_post_usecase.dart';
 import 'package:instagram_ca/features/domain/usecases/firebase_usecases/storage/upload_image_to_storage_usecase.dart';
 import 'package:instagram_ca/features/domain/usecases/firebase_usecases/user/create_user_usecase.dart';
 import 'package:instagram_ca/features/domain/usecases/firebase_usecases/user/create_user_with_image_usecase.dart';
@@ -19,8 +20,14 @@ import 'package:instagram_ca/features/domain/usecases/firebase_usecases/user/sig
 import 'package:instagram_ca/features/domain/usecases/firebase_usecases/user/update_user_usecase.dart';
 import 'package:instagram_ca/features/presentation/cubit/auth/cubit/auth_cubit.dart';
 import 'package:instagram_ca/features/presentation/cubit/credential/cubit/credential_cubit.dart';
+import 'package:instagram_ca/features/presentation/cubit/post/cubit/post_cubit.dart';
 import 'package:instagram_ca/features/presentation/cubit/user/cubit/user_cubit.dart';
 import 'package:instagram_ca/features/presentation/cubit/user/get_single_user/cubit/get_single_user_cubit.dart';
+
+import 'features/domain/usecases/firebase_usecases/post/delete_post_usecase.dart';
+import 'features/domain/usecases/firebase_usecases/post/like_post_usecase.dart';
+import 'features/domain/usecases/firebase_usecases/post/read_post_usecase.dart';
+import 'features/domain/usecases/firebase_usecases/post/update_post_usecase.dart';
 
 // Service locator = sl
 final GetIt sl = GetIt.instance;
@@ -40,7 +47,13 @@ Future<void> init() async {
       UserCubit(updateUserUseCase: sl.call(), getUsersUseCase: sl.call()));
 
   sl.registerFactory(() => GetSingleUserCubit(getSingleUserUseCase: sl.call()));
-  // Use Cases
+  sl.registerFactory(() => PostCubit(
+      createPostUseCase: sl.call(),
+      deletePostUseCase: sl.call(),
+      updatePostUseCase: sl.call(),
+      likePostUseCase: sl.call(),
+      readPostUseCase: sl.call()));
+  // User UseCases
   sl.registerLazySingleton(() => SignOutUseCase(repository: sl.call()));
   sl.registerLazySingleton(() => IsSignInUseCase(repository: sl.call()));
   sl.registerLazySingleton(() => GetCurrentUidUseCase(repository: sl.call()));
@@ -49,12 +62,21 @@ Future<void> init() async {
   sl.registerLazySingleton(() => UpdateUserUseCase(repository: sl.call()));
   sl.registerLazySingleton(() => GetUsersUseCase(repository: sl.call()));
   sl.registerLazySingleton(() => CreateUserUseCase(repository: sl.call()));
-  sl.registerLazySingleton(() => CreateUserWithImageUseCase(repository: sl.call()));
+  sl.registerLazySingleton(
+      () => CreateUserWithImageUseCase(repository: sl.call()));
   sl.registerLazySingleton(() => GetSingleUserUseCase(repository: sl.call()));
+
+  // Post Usecases
+  sl.registerLazySingleton(() => CreatePostUseCase(repository: sl.call()));
+  sl.registerLazySingleton(() => DeletePostUseCase(repository: sl.call()));
+  sl.registerLazySingleton(() => LikePostUseCase(repository: sl.call()));
+  sl.registerLazySingleton(() => ReadPostUseCase(repository: sl.call()));
+  sl.registerLazySingleton(() => UpdatePostUseCase(repository: sl.call()));
 
   // Cloud Storage
   sl.registerLazySingleton(
       () => UploadImageToStorageUseCase(repository: sl.call()));
+
 
   // Repository
 
