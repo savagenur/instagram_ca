@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:instagram_ca/constants.dart';
 import 'package:instagram_ca/features/presentation/cubit/user/get_single_user/cubit/get_single_user_cubit.dart';
 import 'package:instagram_ca/features/presentation/pages/activity/activity_page.dart';
@@ -58,19 +57,19 @@ class _MainScreenState extends State<MainScreen> {
               items: const [
                 BottomNavigationBarItem(
                     icon: Icon(
-                      MaterialCommunityIcons.home_variant,
+                      Icons.home,
                       color: primaryColor,
                     ),
                     label: ''),
                 BottomNavigationBarItem(
                     icon: Icon(
-                      Ionicons.md_search,
+                      Icons.search,
                       color: primaryColor,
                     ),
                     label: ''),
                 BottomNavigationBarItem(
                     icon: Icon(
-                      Ionicons.md_add_circle,
+                      Icons.add_circle_outline,
                       color: primaryColor,
                     ),
                     label: ''),

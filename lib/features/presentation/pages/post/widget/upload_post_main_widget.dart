@@ -71,7 +71,8 @@ class _UploadPostMainWidgetState extends State<UploadPostMainWidget> {
                   child: GestureDetector(
                     onTap: _submitPost,
                     child: Icon(
-                      Icons.arrow_forward,
+                      Icons.done,
+                      color: blueColor,
                       size: 28,
                     ),
                   ),
@@ -150,6 +151,7 @@ class _UploadPostMainWidgetState extends State<UploadPostMainWidget> {
           createAt: Timestamp.now(),
           creatorUid: widget.currentUser.uid,
           likes: [],
+          postImageUrl: image,
           postId: Uuid().v1(),
           totalComments: 0,
           totalLikes: 0,

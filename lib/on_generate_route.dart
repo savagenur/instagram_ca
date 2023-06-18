@@ -10,7 +10,7 @@ import 'features/presentation/pages/post/comment/comment_page.dart';
 
 class OnGenerateRoute {
   static Route<dynamic>? route(RouteSettings settings) {
-    final args = settings.arguments;
+    dynamic args = settings.arguments;
     switch (settings.name) {
       case PageConst.editProfilePage:
         if (args is UserEntity) {
@@ -19,7 +19,10 @@ class OnGenerateRoute {
           return routeBuilder(NoPageFound());
         }
       case PageConst.updatePostPage:
-        return routeBuilder(UpdatePostPage());
+        args = args as UpdatePostPage;
+        return routeBuilder(UpdatePostPage(
+          postEntity: args.postEntity,
+        ));
       case PageConst.commentPage:
         return routeBuilder(CommentPage());
       case PageConst.signInPage:
