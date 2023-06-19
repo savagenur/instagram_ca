@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:instagram_ca/features/domain/entities/user/user_entity.dart';
 
+import '../../../domain/entities/comment/comment_entity.dart';
 import '../../../domain/entities/post/post_entity.dart';
 
 abstract class FirebaseRemoteDataSource {
@@ -29,4 +30,11 @@ abstract class FirebaseRemoteDataSource {
   Future<void> updatePost(PostEntity postEntity);
   Future<void> deletePost(PostEntity postEntity);
   Future<void> likePost(PostEntity postEntity);
+
+  // Comment features
+  Future<void> createComment(CommentEntity commentEntity);
+  Stream<List<PostEntity>> readComment(String postId);
+  Future<void> updateComment(CommentEntity commentEntity);
+  Future<void> deleteComment(CommentEntity commentEntity);
+  Future<void> likeComment(CommentEntity commentEntity);
 }
