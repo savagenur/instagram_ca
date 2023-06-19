@@ -8,7 +8,7 @@ class ReadCommentUsecase {
     required this.repository,
   });
 
-  Stream<List<PostEntity>> call(String postId)  {
+  Stream<List<CommentEntity>> call(String postId)  {
     return repository.readComment(postId);
   }
 }

@@ -81,7 +81,7 @@ class FirebaseRepositoryImpl implements FirebaseRepository {
   Future<void> likeComment(CommentEntity commentEntity) async=>remoteDataSource.likeComment(commentEntity);
 
   @override
-  Stream<List<PostEntity>> readComment(String postId) =>remoteDataSource.readComment(postId);
+  Stream<List<CommentEntity>> readComment(String postId) =>remoteDataSource.readComment(postId);
 
   @override
   Future<void> updateComment(CommentEntity commentEntity) async=>remoteDataSource.updateComment(commentEntity);

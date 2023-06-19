@@ -33,7 +33,7 @@ abstract class FirebaseRemoteDataSource {
 
   // Comment features
   Future<void> createComment(CommentEntity commentEntity);
-  Stream<List<PostEntity>> readComment(String postId);
+  Stream<List<CommentEntity>> readComment(String postId);
   Future<void> updateComment(CommentEntity commentEntity);
   Future<void> deleteComment(CommentEntity commentEntity);
   Future<void> likeComment(CommentEntity commentEntity);
