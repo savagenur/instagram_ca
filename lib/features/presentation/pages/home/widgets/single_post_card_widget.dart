@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_ca/features/domain/entities/post/post_entity.dart';
+import 'package:instagram_ca/features/domain/usecases/firebase_usecases/user/get_current_uid_usecase.dart';
 import 'package:instagram_ca/features/presentation/cubit/post/cubit/post_cubit.dart';
 import 'package:instagram_ca/features/presentation/pages/post/update_post_page.dart';
+import 'package:instagram_ca/features/presentation/pages/post/widget/like_animation_widget.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:instagram_ca/injection_container.dart' as di;
 
 import '../../../../../constants.dart';
 import '../../../../../profile_widget.dart';
@@ -18,6 +21,14 @@ class SinglePostCardWidget extends StatefulWidget {
 }
 
 class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
+  bool _isLikeAnimating = false;
+  String _currentUid = '';
+  @override
+  void initState() {
+    di.sl<GetCurrentUidUseCase>().call().then((value) => _currentUid=value);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -64,11 +75,41 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
               ],
             ),
             sizeVer(10),
-            Container(
-              width: double.infinity,
-              height: MediaQuery.of(context).size.height * .3,
-              child:
-                  profileWidget(imageUrl: "${widget.postEntity.postImageUrl}"),
+            GestureDetector(
+              onDoubleTap: () {
+                _likePost();
+                setState(() {
+                  _isLikeAnimating = true;
+                });
+              },
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: MediaQuery.of(context).size.height * .3,
+                    child: profileWidget(
+                        imageUrl: "${widget.postEntity.postImageUrl}"),
+                  ),
+                  AnimatedOpacity(
+                    duration: Duration(milliseconds: 200),
+                    opacity: _isLikeAnimating ? 1 : 0,
+                    child: LikeAnimationWidget(
+                        duration: Duration(milliseconds: 300),
+                        isLikeAnimating: _isLikeAnimating,
+                        onLikeFinish: () {
+                          setState(() {
+                            _isLikeAnimating = false;
+                          });
+                        },
+                        child: Icon(
+                       Icons.favorite,
+                          size: 100,
+                          color: Colors.white,
+                        )),
+                  ),
+                ],
+              ),
             ),
             sizeVer(10),
             Row(
@@ -76,10 +117,13 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
               children: [
                 Row(
                   children: [
-                    const Icon(
-                      Icons.favorite,
-                      color: primaryColor,
-                    ),
+                     GestureDetector(
+                      onTap: _likePost,
+                       child: Icon(
+                        widget.postEntity.likes!.contains(_currentUid)?   Icons.favorite:Icons.favorite_border,
+                        color:widget.postEntity.likes!.contains(_currentUid)?Colors.red: primaryColor,
+                                         ),
+                     ),
                     sizeHor(10),
                     GestureDetector(
                       onTap: () =>
@@ -237,5 +281,12 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
     Navigator.pop(context);
     BlocProvider.of<PostCubit>(context)
         .deletePost(postEntity: PostEntity(postId: widget.postEntity.postId));
+  }
+
+  _likePost() {
+    BlocProvider.of<PostCubit>(context).likePost(
+        postEntity: PostEntity(
+      postId: widget.postEntity.postId,
+    ));
   }
 }
