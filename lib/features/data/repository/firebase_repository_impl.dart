@@ -52,38 +52,54 @@ class FirebaseRepositoryImpl implements FirebaseRepository {
   }
 
   @override
-  Future<void> createUserWithImage(UserEntity userEntity, String profileUrl) async {
+  Future<void> createUserWithImage(
+      UserEntity userEntity, String profileUrl) async {
     return remoteDataSource.createUserWithImage(userEntity, profileUrl);
   }
 
   @override
-  Future<void> createPost(PostEntity postEntity) async=>remoteDataSource.createPost(postEntity);
+  Future<void> createPost(PostEntity postEntity) async =>
+      remoteDataSource.createPost(postEntity);
 
   @override
-  Future<void> deletePost(PostEntity postEntity) async=>remoteDataSource.deletePost(postEntity);
+  Future<void> deletePost(PostEntity postEntity) async =>
+      remoteDataSource.deletePost(postEntity);
 
   @override
-  Future<void> likePost(PostEntity postEntity) async=>remoteDataSource.likePost(postEntity);
+  Future<void> likePost(PostEntity postEntity) async =>
+      remoteDataSource.likePost(postEntity);
 
   @override
-  Stream<List<PostEntity>> readPost(PostEntity postEntity) =>remoteDataSource.readPost(postEntity);
+  Stream<List<PostEntity>> readPost(PostEntity postEntity) =>
+      remoteDataSource.readPost(postEntity);
 
   @override
-  Future<void> updatePost(PostEntity postEntity) async=>remoteDataSource.updatePost(postEntity);
+  Stream<List<PostEntity>> readSinglePost(String postId) =>
+      remoteDataSource.readSinglePost(postId);
 
   @override
-  Future<void> createComment(CommentEntity commentEntity) async=>remoteDataSource.createComment(commentEntity);
+  Future<void> updatePost(PostEntity postEntity) async =>
+      remoteDataSource.updatePost(postEntity);
 
   @override
-  Future<void> deleteComment(CommentEntity commentEntity) async=>remoteDataSource.deleteComment(commentEntity);
+  Future<void> createComment(CommentEntity commentEntity) async =>
+      remoteDataSource.createComment(commentEntity);
 
   @override
-  Future<void> likeComment(CommentEntity commentEntity) async=>remoteDataSource.likeComment(commentEntity);
+  Future<void> deleteComment(CommentEntity commentEntity) async =>
+      remoteDataSource.deleteComment(commentEntity);
 
   @override
-  Stream<List<CommentEntity>> readComment(String postId) =>remoteDataSource.readComment(postId);
+  Future<void> likeComment(CommentEntity commentEntity) async =>
+      remoteDataSource.likeComment(commentEntity);
 
   @override
-  Future<void> updateComment(CommentEntity commentEntity) async=>remoteDataSource.updateComment(commentEntity);
+  Stream<List<CommentEntity>> readComments(String postId) =>
+      remoteDataSource.readComments(postId);
 
+  @override
+  Future<void> updateComment(CommentEntity commentEntity) async =>
+      remoteDataSource.updateComment(commentEntity);
+      
+      
 }

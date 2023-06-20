@@ -278,6 +278,14 @@ class FirebaseRemoteDataSourceImpl implements FirebaseRemoteDataSource {
   }
 
   @override
+  Stream<List<PostEntity>> readSinglePost(String postId) {
+    final postCollection = firebaseFirestore
+        .collection(FirebaseConst.posts).where("postId",isEqualTo: postId).limit(1);
+    return postCollection.snapshots().map((querySnapshot) =>
+        querySnapshot.docs.map((e) => PostModel.fromSnapshot(e)).toList());
+  }
+
+  @override
   Future<void> updatePost(PostEntity postEntity) async {
     final postCollection = firebaseFirestore.collection(FirebaseConst.posts);
     Map<String, dynamic> postInfo = Map();
@@ -312,23 +320,23 @@ class FirebaseRemoteDataSourceImpl implements FirebaseRemoteDataSource {
       final commentDocRef =
           await commentCollection.doc(commentEntity.commentId).get();
       if (!commentDocRef.exists) {
-        commentCollection
+        await commentCollection
             .doc(commentEntity.commentId)
             .set(newComment)
             .then((value) {
           final postCollection = firebaseFirestore
               .collection(FirebaseConst.posts)
               .doc(commentEntity.postId);
-          postCollection.get().then((value) {
+          postCollection.get().then((value) async {
             if (value.exists) {
               final totalComments = value.get("totalComments");
-              postCollection.update({"totalComments": totalComments + 1});
+              await postCollection.update({"totalComments": totalComments + 1});
               return;
             }
           });
         });
       } else {
-        commentCollection.doc(commentEntity.commentId).update(newComment);
+        await commentCollection.doc(commentEntity.commentId).update(newComment);
       }
     } catch (e) {
       print("Some error occurred ($e)!");
@@ -375,22 +383,22 @@ class FirebaseRemoteDataSourceImpl implements FirebaseRemoteDataSource {
       List likes = commentDocRef.get("likes");
       if (likes.contains(currentUid)) {
         commentCollection.doc(commentEntity.commentId).update({
-          "likes": FieldValue.arrayRemove([likes])
+          "likes": FieldValue.arrayRemove([currentUid])
         });
       } else {
         commentCollection
             .doc(commentEntity.commentId)
-            .update({"likes": FieldValue.arrayUnion(likes)});
+            .update({"likes": FieldValue.arrayUnion([currentUid])});
       }
     }
   }
 
   @override
-  Stream<List<CommentEntity>> readComment(String postId) {
+  Stream<List<CommentEntity>> readComments(String postId) {
     final commentCollection = firebaseFirestore
         .collection(FirebaseConst.posts)
         .doc(postId)
-        .collection(FirebaseConst.comment);
+        .collection(FirebaseConst.comment).orderBy("createdAt",descending: true);
     return commentCollection.snapshots().map((querySnapshot) =>
         querySnapshot.docs.map((e) => CommentModel.fromSnapshot(e)).toList());
   }

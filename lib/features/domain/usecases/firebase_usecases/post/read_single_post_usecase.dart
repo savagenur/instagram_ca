@@ -1,14 +1,13 @@
-import 'package:instagram_ca/features/domain/entities/comment/comment_entity.dart';
 import 'package:instagram_ca/features/domain/entities/post/post_entity.dart';
 import 'package:instagram_ca/features/domain/repository/firebase_repository.dart';
 
-class ReadCommentsUsecase {
+class ReadSinglePostUsecase {
   final FirebaseRepository repository;
-  ReadCommentsUsecase({
+  ReadSinglePostUsecase({
     required this.repository,
   });
 
-  Stream<List<CommentEntity>> call(String postId) {
-    return repository.readComments(postId);
+  Stream<List<PostEntity>> call(String postId) {
+    return repository.readSinglePost(postId);
   }
 }

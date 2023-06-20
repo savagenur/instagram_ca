@@ -30,9 +30,9 @@ class PostCubit extends Cubit<PostState> {
     emit(PostLoading());
     try {
       final streamResponse = readPostUseCase.call(postEntity);
-      streamResponse.listen((posts) {
+      await for (final posts in streamResponse) {
         emit(PostLoaded(posts: posts));
-      });
+      }
     } on SocketException catch (_) {
       emit(PostFailure());
     } catch (_) {
@@ -49,6 +49,7 @@ class PostCubit extends Cubit<PostState> {
       emit(PostFailure());
     }
   }
+
   Future<void> likePost({required PostEntity postEntity}) async {
     try {
       await likePostUseCase.call(postEntity);
@@ -58,6 +59,7 @@ class PostCubit extends Cubit<PostState> {
       emit(PostFailure());
     }
   }
+
   Future<void> deletePost({required PostEntity postEntity}) async {
     try {
       await deletePostUseCase.call(postEntity);
@@ -67,6 +69,7 @@ class PostCubit extends Cubit<PostState> {
       emit(PostFailure());
     }
   }
+
   Future<void> createPost({required PostEntity postEntity}) async {
     try {
       await createPostUseCase.call(postEntity);

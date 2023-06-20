@@ -1,13 +1,13 @@
 import 'package:instagram_ca/features/domain/entities/comment/comment_entity.dart';
 import 'package:instagram_ca/features/domain/repository/firebase_repository.dart';
 
-class CreateCommentUsecase {
+class UpdateCommentUsecase {
   final FirebaseRepository repository;
-  CreateCommentUsecase({
+  UpdateCommentUsecase({
     required this.repository,
   });
 
   Future<void> call(CommentEntity commentEntity) async {
-    return repository.createComment(commentEntity);
+    return repository.updateComment(commentEntity);
   }
 }

@@ -27,13 +27,14 @@ abstract class FirebaseRepository {
   // Post features
   Future<void> createPost(PostEntity postEntity);
   Stream<List<PostEntity>> readPost(PostEntity postEntity);
+  Stream<List<PostEntity>> readSinglePost(String postId);
   Future<void> updatePost(PostEntity postEntity);
   Future<void> deletePost(PostEntity postEntity);
   Future<void> likePost(PostEntity postEntity);
 
   // Comment features
   Future<void> createComment(CommentEntity commentEntity);
-  Stream<List<CommentEntity>> readComment(String postId);
+  Stream<List<CommentEntity>> readComments(String postId);
   Future<void> updateComment(CommentEntity commentEntity);
   Future<void> deleteComment(CommentEntity commentEntity);
   Future<void> likeComment(CommentEntity commentEntity);

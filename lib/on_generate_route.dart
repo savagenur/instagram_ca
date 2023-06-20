@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_ca/constants.dart';
+import 'package:instagram_ca/features/domain/entities/app_entity.dart';
 import 'package:instagram_ca/features/domain/entities/user/user_entity.dart';
+import 'package:instagram_ca/features/presentation/pages/post/comment/update_comment_page.dart';
 import 'package:instagram_ca/features/presentation/pages/post/update_post_page.dart';
 import 'package:instagram_ca/features/presentation/pages/profile/edit_profile_page.dart';
 
@@ -24,7 +26,11 @@ class OnGenerateRoute {
           postEntity: args.postEntity,
         ));
       case PageConst.commentPage:
-        return routeBuilder(CommentPage());
+        args = args as AppEntity;
+        return routeBuilder(CommentPage(appEntity: args,));
+      case PageConst.updateCommentPage:
+        args = args as UpdateCommentPage;
+        return routeBuilder(UpdateCommentPage(commentEntity: args.commentEntity,));
       case PageConst.signInPage:
         return routeBuilder(SignInPage());
       case PageConst.signUpPage:

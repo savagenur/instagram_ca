@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram_ca/features/domain/entities/app_entity.dart';
 import 'package:instagram_ca/features/domain/entities/post/post_entity.dart';
 import 'package:instagram_ca/features/domain/usecases/firebase_usecases/user/get_current_uid_usecase.dart';
 import 'package:instagram_ca/features/presentation/cubit/post/cubit/post_cubit.dart';
+import 'package:instagram_ca/features/presentation/pages/post/comment/comment_page.dart';
 import 'package:instagram_ca/features/presentation/pages/post/update_post_page.dart';
 import 'package:instagram_ca/features/presentation/pages/post/widget/like_animation_widget.dart';
 import 'package:intl/intl.dart';
@@ -22,10 +24,10 @@ class SinglePostCardWidget extends StatefulWidget {
 
 class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
   bool _isLikeAnimating = false;
-  String _currentUid = '';
+  late String _currentUid;
   @override
   void initState() {
-    di.sl<GetCurrentUidUseCase>().call().then((value) => _currentUid=value);
+    _currentUid = widget.postEntity.creatorUid!;
     super.initState();
   }
 
@@ -103,7 +105,7 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
                           });
                         },
                         child: Icon(
-                       Icons.favorite,
+                          Icons.favorite,
                           size: 100,
                           color: Colors.white,
                         )),
@@ -117,17 +119,26 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
               children: [
                 Row(
                   children: [
-                     GestureDetector(
+                    GestureDetector(
                       onTap: _likePost,
-                       child: Icon(
-                        widget.postEntity.likes!.contains(_currentUid)?   Icons.favorite:Icons.favorite_border,
-                        color:widget.postEntity.likes!.contains(_currentUid)?Colors.red: primaryColor,
-                                         ),
-                     ),
+                      child: Icon(
+                        widget.postEntity.likes!.contains(_currentUid)
+                            ? Icons.favorite
+                            : Icons.favorite_border,
+                        color: widget.postEntity.likes!.contains(_currentUid)
+                            ? Colors.red
+                            : primaryColor,
+                      ),
+                    ),
                     sizeHor(10),
                     GestureDetector(
                       onTap: () =>
-                          Navigator.pushNamed(context, PageConst.commentPage),
+                          Navigator.pushNamed(context, PageConst.commentPage,
+                              arguments: AppEntity(
+                                uid: _currentUid,
+                                postId: widget.postEntity.postId,
+                                postEntity: widget.postEntity,
+                              )),
                       child: const Icon(
                         Icons.message,
                         color: primaryColor,
@@ -175,10 +186,20 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
               ],
             ),
             sizeVer(10),
-            Text(
-              "View all ${widget.postEntity.totalComments} comments",
-              style: TextStyle(
-                color: darkGreyColor,
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, PageConst.commentPage,
+                    arguments: AppEntity(
+                      uid: _currentUid,
+                      postId: widget.postEntity.postId,
+                      postEntity: widget.postEntity,
+                    ));
+              },
+              child: Text(
+                "View all ${widget.postEntity.totalComments} comments",
+                style: TextStyle(
+                  color: darkGreyColor,
+                ),
               ),
             ),
             sizeVer(10),
