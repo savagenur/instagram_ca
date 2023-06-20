@@ -4,6 +4,7 @@ import 'package:instagram_ca/features/domain/entities/user/user_entity.dart';
 
 import '../../../domain/entities/comment/comment_entity.dart';
 import '../../../domain/entities/post/post_entity.dart';
+import '../../../domain/entities/reply/reply_entity.dart';
 
 abstract class FirebaseRemoteDataSource {
   // Credential features
@@ -38,4 +39,11 @@ abstract class FirebaseRemoteDataSource {
   Future<void> updateComment(CommentEntity commentEntity);
   Future<void> deleteComment(CommentEntity commentEntity);
   Future<void> likeComment(CommentEntity commentEntity);
+
+  // Reply features
+  Future<void> createReply(ReplyEntity replyEntity);
+  Stream<List<ReplyEntity>> readReplies(ReplyEntity replyEntity);
+  Future<void> updateReply(ReplyEntity replyEntity);
+  Future<void> deleteReply(ReplyEntity replyEntity);
+  Future<void> likeReply(ReplyEntity replyEntity);
 }

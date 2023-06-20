@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:instagram_ca/features/domain/entities/post/post_entity.dart';
+import 'package:instagram_ca/features/domain/entities/reply/reply_entity.dart';
 import 'package:instagram_ca/features/domain/entities/user/user_entity.dart';
 
 import '../entities/comment/comment_entity.dart';
@@ -38,4 +39,11 @@ abstract class FirebaseRepository {
   Future<void> updateComment(CommentEntity commentEntity);
   Future<void> deleteComment(CommentEntity commentEntity);
   Future<void> likeComment(CommentEntity commentEntity);
+
+  // Reply features
+  Future<void> createReply(ReplyEntity replyEntity);
+  Stream<List<ReplyEntity>> readReplies(ReplyEntity replyEntity);
+  Future<void> updateReply(ReplyEntity replyEntity);
+  Future<void> deleteReply(ReplyEntity replyEntity);
+  Future<void> likeReply(ReplyEntity replyEntity);
 }

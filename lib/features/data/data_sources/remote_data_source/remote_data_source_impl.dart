@@ -11,6 +11,7 @@ import 'package:instagram_ca/features/data/models/post/post_model.dart';
 import 'package:instagram_ca/features/data/models/user/user_model.dart';
 import 'package:instagram_ca/features/domain/entities/comment/comment_entity.dart';
 import 'package:instagram_ca/features/domain/entities/post/post_entity.dart';
+import 'package:instagram_ca/features/domain/entities/reply/reply_entity.dart';
 import 'package:instagram_ca/features/domain/entities/user/user_entity.dart';
 import 'package:uuid/uuid.dart';
 
@@ -414,5 +415,35 @@ class FirebaseRemoteDataSourceImpl implements FirebaseRemoteDataSource {
       commentInfo["description"] = commentEntity.description;
     }
     commentCollection.doc(commentEntity.commentId).update(commentInfo);
+  }
+
+  @override
+  Future<void> createReply(ReplyEntity replyEntity) {
+    // TODO: implement createReply
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> deleteReply(ReplyEntity replyEntity) {
+    // TODO: implement deleteReply
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> likeReply(ReplyEntity replyEntity) {
+    // TODO: implement likeReply
+    throw UnimplementedError();
+  }
+
+  @override
+  Stream<List<ReplyEntity>> readReplies(ReplyEntity replyEntity) {
+    // TODO: implement readReplies
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> updateReply(ReplyEntity replyEntity) {
+    // TODO: implement updateReply
+    throw UnimplementedError();
   }
 }
